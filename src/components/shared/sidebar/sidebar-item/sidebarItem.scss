@@ -1,0 +1,39 @@
+.sidebar-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin-right: 12px;
+
+  transition: background-color 0.2s;
+
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 100px;
+  color: var(--sidebar-text-color);
+
+  &__wrapper{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    &__icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 20px;
+    }
+  }
+
+  &__badge{
+    font-size: x-small;
+    border-radius: 100px;
+    background-color: var(--primary-color);
+    padding: 3px 5px;
+  }
+
+  &:hover {
+    background-color: var(--sidebar-hover-color);
+  }
+}

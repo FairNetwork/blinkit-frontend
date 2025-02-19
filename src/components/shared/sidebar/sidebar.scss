@@ -1,0 +1,26 @@
+.sidebar{
+  width: 270px;
+  height: 100%;
+  border-right: 1px solid var(--thin-border-color);
+  flex-shrink: 0;
+  position: relative;
+
+  background-color: var(--secondary-background-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &__logo{
+    font-weight: bold;
+    font-size: 24px;
+  }
+}
+
+.blur{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 99;
+}

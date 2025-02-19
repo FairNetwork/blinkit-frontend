@@ -1,0 +1,12 @@
+.sub-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  &__heading {
+    margin-left: 12px;
+    font-weight: bold;
+
+    margin-bottom: 4px;
+  }
+}

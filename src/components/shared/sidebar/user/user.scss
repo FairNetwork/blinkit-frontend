@@ -1,0 +1,19 @@
+.user{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 12px;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  background-color: var(--secondary-background-color);
+  border-top: 1px solid var(--thin-border-color);
+
+  &__login-button{
+    margin: 0 auto;
+  }
+}
