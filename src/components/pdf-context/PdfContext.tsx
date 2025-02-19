@@ -8,6 +8,7 @@ import {
     removePdfFromDb,
     updatePdfInDb
 } from '../../utils/pdf';
+import { useNavigate } from 'react-router-dom';
 
 interface PDFContextType {
     pdfList: PDF[];
@@ -26,6 +27,8 @@ interface PDFProviderProps {
 
 export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
     const [pdfList, setPdfList] = useState<PDF[]>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadPdfs = async () => {
@@ -65,6 +68,8 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
         await removePdfFromDb(id);
 
         setPdfList((prev) => prev.filter((pdf) => pdf.id !== id));
+
+        navigate('/');
     };
 
     const updatePdf = async (id: string, updatedPdf: PDF) => {

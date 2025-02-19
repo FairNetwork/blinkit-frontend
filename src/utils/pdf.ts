@@ -19,7 +19,7 @@ export const openDb = () => {
         request.onupgradeneeded = (event) => {
             const db = (event.target as IDBRequest).result;
             if (!db.objectStoreNames.contains(STORE_NAME)) {
-                db.createObjectStore(STORE_NAME, { keyPath: 'name' });
+                db.createObjectStore(STORE_NAME, { keyPath: 'id' });
             }
         };
 
