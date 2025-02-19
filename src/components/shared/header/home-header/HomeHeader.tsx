@@ -19,7 +19,7 @@ const HomeHeader = () => {
                     />
                 </div>
             )}
-            <div>FairNet</div>
+            <div>BlinkIt</div>
         </div>
     );
 };
