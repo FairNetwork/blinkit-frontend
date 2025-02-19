@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
+    "@types/pdfjs-dist": "^2.10.377",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "eslint": "^9.18.0",
@@ -34,7 +35,7 @@
     "@reduxjs/toolkit": "^2.2.1",
     "cra-template": "1.2.0",
     "framer-motion": "^12.0.5",
-    "pdfjs-dist": "^4.10.38",
+    "pdfjs-dist": "2.2.228",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",

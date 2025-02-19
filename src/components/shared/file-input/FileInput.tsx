@@ -9,7 +9,7 @@ interface FileInputProps {
 
 const FileInput = ({ onSelect }: FileInputProps) => {
     const handleUploadClick = async () => {
-        const files = await selectFiles({ multiple: true, type: 'image/*' });
+        const files = await selectFiles({ multiple: false, type: 'application/pdf' });
 
         if (typeof onSelect === 'function' && files) {
             onSelect(files);

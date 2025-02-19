@@ -1,5 +1,6 @@
 import pdfjs from 'pdfjs-dist';
-import 'pdfjs-dist/build/pdf.worker.entry';
+
+pdfjs.GlobalWorkerOptions.workerSrc = 'https://d2v5g.csb.app/pdf.worker.js';
 
 export const getPdfPageCount = async (base64Data: string): Promise<number> => {
     const loadingTask = pdfjs.getDocument({ data: atob(base64Data.split(',')[1]) });
