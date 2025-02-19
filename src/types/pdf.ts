@@ -3,5 +3,5 @@ export interface PDF {
     data: string;
     pages: number;
     currentPage: number;
-    previewUrl: string;
+    id: string;
 }
