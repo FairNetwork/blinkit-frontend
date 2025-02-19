@@ -1,0 +1,15 @@
+.pdf {
+  display: flex;
+  justify-content: center;
+
+  canvas {
+    width: 80%;
+  }
+
+  &__error {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+  }
+}

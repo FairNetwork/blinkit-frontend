@@ -14,6 +14,7 @@ interface PDFContextType {
     addPdf: (file: File) => void;
     removePdf: (id: string) => void;
     updatePdf: (id: string, updatedPdf: PDF) => void;
+    getPdfById: (id: string) => PDF | undefined;
 }
 
 const PDFContext = createContext<PDFContextType | undefined>(undefined);
@@ -44,7 +45,7 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
 
                 const newPdf: PDF = {
                     id: uuidv4(),
-                    name: file.name,
+                    name: file.name.replace('.pdf', ''),
                     data: base64Data,
                     pages,
                     currentPage: 1
@@ -71,8 +72,12 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
         setPdfList((prev) => prev.map((pdf) => (pdf.id === id ? updatedPdf : pdf)));
     };
 
+    const getPdfById = (id: string): PDF | undefined => {
+        return pdfList.find((pdf) => pdf.id === id);
+    };
+
     return (
-        <PDFContext.Provider value={{ pdfList, addPdf, removePdf, updatePdf }}>
+        <PDFContext.Provider value={{ pdfList, addPdf, removePdf, updatePdf, getPdfById }}>
             {children}
         </PDFContext.Provider>
     );
