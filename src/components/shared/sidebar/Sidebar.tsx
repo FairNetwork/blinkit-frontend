@@ -1,16 +1,19 @@
 import SubHeading from './sub-heading/SubHeading';
 import SidebarItem from './sidebar-item/SidebarItem';
 import Logo from './logo/Logo';
-import logo from '../../../assets/fairfit_logo.png';
+import logo from '../../../assets/BlinkIt_Logo.png';
 import './sidebar.scss';
 import { useSidebarProvider } from './SidebarProvider';
 import { CSSProperties, useEffect, useMemo, useRef } from 'react';
 import { useIsMobile } from '../../../hooks/environment';
 import { motion } from 'framer-motion';
+import { useSidebarFileContent } from '../../../hooks/sidebar';
 
 const Sidebar = () => {
     const { isOpen, updateIsOpen, width } = useSidebarProvider();
     const isMobile = useIsMobile();
+
+    const fileContent = useSidebarFileContent();
 
     const ref = useRef<HTMLDivElement>(null);
 
@@ -63,11 +66,12 @@ const Sidebar = () => {
                 exit={isMobile ? { left: `-${width}` } : {}}
                 animate={isMobile ? { left: isOpen ? '0' : `-${width}` } : {}}>
                 <Logo src={logo}>
-                    <div className="sidebar__logo">FairNet</div>
+                    <div className="sidebar__logo">BlinkIt</div>
                 </Logo>
                 <SubHeading>
                     <SidebarItem text="Home" icon="fas fa-house" route="/" />
                 </SubHeading>
+                <SubHeading heading="Dateien">{fileContent}</SubHeading>
             </motion.div>
             {isMobile && isOpen && (
                 <motion.div

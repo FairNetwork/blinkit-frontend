@@ -12,21 +12,28 @@
   border-top-right-radius: 100px;
   color: var(--sidebar-text-color);
 
-  &__wrapper{
+  &__wrapper {
     display: flex;
     gap: 12px;
     align-items: center;
+    width: 100%;
 
-    &__icon{
+    &__icon {
       display: flex;
       align-items: center;
       justify-content: center;
-
       width: 20px;
+    }
+
+    &__text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
     }
   }
 
-  &__badge{
+  &__badge {
     font-size: x-small;
     border-radius: 100px;
     background-color: var(--primary-color);
