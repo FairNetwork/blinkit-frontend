@@ -1,7 +1,7 @@
 import SubHeading from './sub-heading/SubHeading';
 import SidebarItem from './sidebar-item/SidebarItem';
 import Logo from './logo/Logo';
-import logo from '../../../assets/fairfit_logo.png';
+import logo from '../../../assets/BlinkIt_Logo.png';
 import './sidebar.scss';
 import { useSidebarProvider } from './SidebarProvider';
 import { CSSProperties, useEffect, useMemo, useRef } from 'react';
