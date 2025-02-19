@@ -17,7 +17,7 @@ const PdfHeader = () => {
 
     return (
         <div className="pdf-header">
-            <div>
+            <div className="pdf-header__left-wrapper">
                 {isMobile && (
                     <div id="sidebar-toggle">
                         <Icon
