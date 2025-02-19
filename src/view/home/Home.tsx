@@ -15,7 +15,13 @@ const Home = () => {
 
     return (
         <div className="home" id="home">
-            <div className="home__headline">Home</div>
+            <div className="home__headline">
+                BlinkIt – Blättere durch deine PDFs mit einem Augenblick!
+            </div>
+            Mit BlinkIt wechselst du PDF-Seiten ganz einfach durch dreimal schnelles Blinzeln. Kein
+            Tippen, kein Wischen – nur dein Blick steuert dein Leseerlebnis. Speichere automatisch
+            deine zuletzt gelesene Seite, öffne deine Lieblingsdokumente blitzschnell und genieße
+            ein völlig neues, freihändiges Lesen.
             <FileInput onSelect={handleSelectFiles} />
         </div>
     );
