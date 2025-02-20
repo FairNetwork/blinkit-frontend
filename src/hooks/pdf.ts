@@ -50,6 +50,11 @@ export const usePdfViewer = () => {
         const container = canvasRef.current.parentElement;
         if (!container) return;
 
+        const existingCanvas = container.querySelector('canvas');
+        if (existingCanvas) {
+            container.removeChild(existingCanvas);
+        }
+
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
@@ -60,7 +65,9 @@ export const usePdfViewer = () => {
         const scale = Math.min(containerWidth / pdfWidth, containerHeight / pdfHeight);
         const scaledViewport = page.getViewport({ scale });
 
-        const canvas = canvasRef.current;
+        const canvas = document.createElement('canvas');
+        container.appendChild(canvas);
+
         const context = canvas.getContext('2d');
 
         canvas.width = container.clientWidth;

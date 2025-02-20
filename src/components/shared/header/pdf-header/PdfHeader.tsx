@@ -4,11 +4,13 @@ import Icon from '../../icon/Icon';
 import { useSidebarProvider } from '../../sidebar/SidebarProvider';
 import { usePDFContext } from '../../../pdf-context/PdfContext';
 import { usePdfRoute } from '../../../../hooks/pdf';
+import { useMemo } from 'react';
+import { EYE_STATE } from '../../../../types/pdf';
 
 const PdfHeader = () => {
     const isMobile = useIsMobile();
     const { updateIsOpen } = useSidebarProvider();
-    const { removePdf, getPdfById } = usePDFContext();
+    const { removePdf, getPdfById, eyeState } = usePDFContext();
     const pdfId = usePdfRoute();
 
     const handleIconClick = () => {
@@ -16,6 +18,20 @@ const PdfHeader = () => {
     };
 
     const pdf = getPdfById(pdfId);
+
+    const eyeColor = useMemo(() => {
+        switch (eyeState) {
+            case EYE_STATE.SUCCESSFUL:
+                return 'green';
+            case EYE_STATE.RECORDING:
+                return 'yellow';
+            case EYE_STATE.PAUSED:
+                return 'red';
+            case EYE_STATE.NONE:
+            default:
+                return 'grey';
+        }
+    }, [eyeState]);
 
     return (
         <div className="pdf-header">
@@ -33,6 +49,7 @@ const PdfHeader = () => {
                 <div>BlinkIt</div>
             </div>
             <div className="pdf-header__right-wrapper">
+                <Icon icon="fas fa-eye" color={eyeColor} />
                 <div className="pdf-header__right-wrapper__pages">
                     {pdf?.currentPage}/{pdf?.pages}
                 </div>

@@ -3,6 +3,11 @@
   justify-content: center;
   height: 100%;
 
+  video{
+    position: absolute;
+    visibility: hidden;
+  }
+
   &__content {
     position: relative;
     width: 100%;

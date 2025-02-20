@@ -5,3 +5,10 @@ export interface PDF {
     currentPage: number;
     id: string;
 }
+
+export enum EYE_STATE {
+    NONE,
+    RECORDING,
+    PAUSED,
+    SUCCESSFUL
+}
