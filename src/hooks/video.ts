@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import * as faceApi from 'face-api.js';
+import * as faceApi from 'face-api.js/dist/face-api.min.js';
 import { usePDFContext } from '../components/pdf-context/PdfContext';
 import { EYE_STATE } from '../types/pdf';
 
