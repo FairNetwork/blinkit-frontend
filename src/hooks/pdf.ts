@@ -26,7 +26,7 @@ export const usePdfViewer = () => {
     const pdfDocRef = useRef<pdfjs.PDFDocumentProxy | null>(null);
     const currentPage = useRef(1);
 
-    const loadPdf = async (base64: string) => {
+    const loadPdf = async (base64: string, page: number) => {
         try {
             const base64Data = base64.split(',').pop() ?? '';
 
@@ -37,7 +37,7 @@ export const usePdfViewer = () => {
             pdfDocRef.current = pdf;
             setNumPages(pdf.numPages);
 
-            void renderPage(1);
+            void renderPage(page);
         } catch (error) {
             console.error('Fehler beim Laden der PDF:', error);
         }
@@ -45,32 +45,51 @@ export const usePdfViewer = () => {
 
     const renderPage = async (pageNum: number) => {
         if (!pdfDocRef.current || !canvasRef.current) return;
-        const page = await pdfDocRef.current.getPage(pageNum);
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
 
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+        const page = await pdfDocRef.current.getPage(pageNum);
+        const container = canvasRef.current.parentElement;
+        if (!container) return;
+
+        const canvas = canvasRef.current;
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const viewport = page.getViewport({ scale: 1 });
+        const pdfWidth = viewport.width;
+        const pdfHeight = viewport.height;
+
+        const scale = Math.min(containerWidth / pdfWidth, containerHeight / pdfHeight);
+        const scaledViewport = page.getViewport({ scale });
+
+        const context = canvas.getContext('2d');
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
 
         const renderContext = {
             canvasContext: context!,
-            viewport
+            viewport: scaledViewport
         };
 
-        await page.render(renderContext).promise;
-        currentPage.current = pageNum;
+        try {
+            await page.render(renderContext).promise;
+            currentPage.current = pageNum;
+        } catch (error) {
+            console.error('Fehler beim Rendern der Seite:', error);
+        }
     };
 
     const nextPage = () => {
         if (pdfDocRef.current && currentPage.current < pdfDocRef.current.numPages) {
-            void renderPage(currentPage.current + 1);
+            currentPage.current += 1;
+            void renderPage(currentPage.current);
         }
     };
 
     const prevPage = () => {
         if (currentPage.current > 1) {
-            void renderPage(currentPage.current - 1);
+            currentPage.current -= 1;
+            void renderPage(currentPage.current);
         }
     };
 

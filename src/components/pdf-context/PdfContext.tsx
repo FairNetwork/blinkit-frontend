@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { PDF } from '../../types/pdf';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { EYE_STATE, PDF } from '../../types/pdf';
 import { v4 as uuidv4 } from 'uuid';
 import {
     addPdfToDb,
@@ -17,6 +17,8 @@ interface PDFContextType {
     updatePdf: (id: string, updatedPdf: PDF) => void;
     updateCurrentPage: (id: string, newPage: number) => void;
     getPdfById: (id: string) => PDF | undefined;
+    eyeState: EYE_STATE;
+    updateEyeState: (state: EYE_STATE) => void;
 }
 
 const PDFContext = createContext<PDFContextType | undefined>(undefined);
@@ -27,6 +29,7 @@ interface PDFProviderProps {
 
 export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
     const [pdfList, setPdfList] = useState<PDF[]>([]);
+    const [eyeState, setEyeState] = useState<EYE_STATE>(EYE_STATE.NONE);
 
     const navigate = useNavigate();
 
@@ -58,6 +61,8 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
                 await addPdfToDb(newPdf);
 
                 setPdfList((prev) => [...prev, newPdf]);
+
+                navigate(`/${newPdf.id}`);
             };
 
             reader.readAsDataURL(file);
@@ -96,7 +101,16 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
 
     return (
         <PDFContext.Provider
-            value={{ pdfList, addPdf, removePdf, updatePdf, getPdfById, updateCurrentPage }}>
+            value={{
+                pdfList,
+                addPdf,
+                removePdf,
+                updatePdf,
+                getPdfById,
+                updateCurrentPage,
+                eyeState,
+                updateEyeState: setEyeState
+            }}>
             {children}
         </PDFContext.Provider>
     );
