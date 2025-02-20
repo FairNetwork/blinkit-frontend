@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
-import './index.css';
+import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
 import SidebarProvider from './components/shared/sidebar/SidebarProvider';
 import { PDFProvider } from './components/pdf-context/PdfContext';
