@@ -99,8 +99,6 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
         }
     };
 
-    console.log('TEST', eyeState);
-
     return (
         <PDFContext.Provider
             value={{

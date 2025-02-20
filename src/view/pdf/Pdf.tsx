@@ -5,20 +5,21 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useBlinkDetection } from '../../hooks/video';
 
 const Pdf = () => {
-    const { getPdfById } = usePDFContext();
+    const { getPdfById, updateCurrentPage } = usePDFContext();
     const { canvasRef, loadPdf, nextPage } = usePdfViewer();
     const pdfId = usePdfRoute();
 
-    const pdf = useMemo(() => getPdfById(pdfId), [pdfId]);
+    const pdf = useMemo(() => getPdfById(pdfId), [pdfId, getPdfById]);
 
     useEffect(() => {
         if (pdf) {
-            void loadPdf(pdf.data);
+            void loadPdf(pdf.data, pdf.currentPage);
         }
     }, [pdf]);
 
     const handleTripleBlink = () => {
         nextPage();
+        updateCurrentPage(pdfId, (pdf?.currentPage ?? 0) + 1);
     };
 
     const videoRef = useBlinkDetection(handleTripleBlink);
