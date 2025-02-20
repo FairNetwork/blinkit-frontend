@@ -45,17 +45,30 @@ export const usePdfViewer = () => {
 
     const renderPage = async (pageNum: number) => {
         if (!pdfDocRef.current || !canvasRef.current) return;
+
         const page = await pdfDocRef.current.getPage(pageNum);
-        const viewport = page.getViewport({ scale: 1.5 });
+        const container = canvasRef.current.parentElement;
+        if (!container) return;
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const viewport = page.getViewport({ scale: 1 });
+        const pdfWidth = viewport.width;
+        const pdfHeight = viewport.height;
+
+        const scale = Math.min(containerWidth / pdfWidth, containerHeight / pdfHeight);
+        const scaledViewport = page.getViewport({ scale });
+
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
 
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight - 2;
 
         const renderContext = {
             canvasContext: context!,
-            viewport
+            viewport: scaledViewport
         };
 
         await page.render(renderContext).promise;

@@ -21,9 +21,6 @@ const Pdf = () => {
             {pdf ? (
                 <div className="pdf__content">
                     <canvas ref={canvasRef}></canvas>
-                    <div className="pdf__content__pages">
-                        {pdf.currentPage}/{pdf.pages}
-                    </div>
                 </div>
             ) : (
                 <div className="pdf__error">Die Datei konnte nicht geladen werden!</div>

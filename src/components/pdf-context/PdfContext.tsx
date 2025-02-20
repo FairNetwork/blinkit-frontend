@@ -58,6 +58,8 @@ export const PDFProvider: React.FC<PDFProviderProps> = ({ children }) => {
                 await addPdfToDb(newPdf);
 
                 setPdfList((prev) => [...prev, newPdf]);
+
+                navigate(`/${newPdf.id}`);
             };
 
             reader.readAsDataURL(file);

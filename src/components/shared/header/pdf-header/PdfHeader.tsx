@@ -8,12 +8,14 @@ import { usePdfRoute } from '../../../../hooks/pdf';
 const PdfHeader = () => {
     const isMobile = useIsMobile();
     const { updateIsOpen } = useSidebarProvider();
-    const { removePdf } = usePDFContext();
+    const { removePdf, getPdfById } = usePDFContext();
     const pdfId = usePdfRoute();
 
     const handleIconClick = () => {
         removePdf(pdfId);
     };
+
+    const pdf = getPdfById(pdfId);
 
     return (
         <div className="pdf-header">
@@ -30,7 +32,10 @@ const PdfHeader = () => {
                 )}
                 <div>BlinkIt</div>
             </div>
-            <div>
+            <div className="pdf-header__right-wrapper">
+                <div className="pdf-header__right-wrapper__pages">
+                    {pdf?.currentPage}/{pdf?.pages}
+                </div>
                 <Icon icon="fa fa-trash" onClick={handleIconClick} />
             </div>
         </div>
